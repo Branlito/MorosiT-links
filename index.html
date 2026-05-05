@@ -268,6 +268,41 @@
       flex-shrink: 0;
       transition: transform 0.18s;
     }
+
+    /* ── Now playing ── */
+    .now-playing {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #1DB954;
+      letter-spacing: 0.04em;
+      margin-top: 0px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .now-playing.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .now-playing .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #1DB954;
+      animation: pulse 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
   </style>
 </head>
 <body>
@@ -289,6 +324,12 @@
       </svg>
       <span id="playLabel">Écouter</span>
     </button>
+
+    <!-- Now playing -->
+    <div class="now-playing" id="nowPlaying">
+      <span class="dot"></span>
+      <span>♪ Sortie Nocturne</span>
+    </div>
 
     <!-- Links -->
     <div class="links-card">
@@ -383,6 +424,7 @@
       var btn = document.getElementById('playBtn');
       var icon = document.getElementById('playIcon');
       var label = document.getElementById('playLabel');
+      var nowPlaying = document.getElementById('nowPlaying');
 
       if (!playing) {
         widget.play();
@@ -390,12 +432,14 @@
         btn.classList.add('playing');
         icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
         label.textContent = 'En cours...';
+        nowPlaying.classList.add('visible');
       } else {
         widget.pause();
         playing = false;
         btn.classList.remove('playing');
         icon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
         label.textContent = 'Écouter';
+        nowPlaying.classList.remove('visible');
       }
     }
   </script>
