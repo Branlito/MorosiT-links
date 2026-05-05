@@ -299,6 +299,33 @@
       flex-shrink: 0;
     }
 
+    /* ── Lang switcher ── */
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      align-self: flex-end;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px 6px;
+      line-height: 1;
+      opacity: 0.35;
+      transition: opacity 0.18s, border-color 0.18s;
+    }
+
+    .lang-btn.active {
+      opacity: 1;
+      border-color: var(--border-hover);
+    }
+
+    .lang-btn:hover { opacity: 0.8; }
+
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(0.7); }
@@ -308,6 +335,12 @@
 <body>
   <div class="container">
 
+    <!-- Lang switcher -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">🇫🇷</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇬🇧</button>
+    </div>
+
     <!-- Photo -->
     <div class="photo-wrapper">
       <img src="ACAB.jpg" alt="MorosiT" />
@@ -315,20 +348,20 @@
 
     <!-- Identity -->
     <h1 class="name">MorosiT</h1>
-    <p class="bio">La suite arrive .... <strong style="color:#E63946;font-weight:700;">ACAB</strong></p>
+    <p class="bio" id="bio" data-fr="La suite arrive .... <strong style='color:#E63946;font-weight:700;'>ACAB</strong>" data-en="More coming soon .... <strong style='color:#E63946;font-weight:700;'>ACAB</strong>">La suite arrive .... <strong style="color:#E63946;font-weight:700;">ACAB</strong></p>
 
     <!-- Play button -->
     <button class="play-btn" id="playBtn" onclick="togglePlay()">
       <svg id="playIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <polygon points="5,3 19,12 5,21"/>
       </svg>
-      <span id="playLabel">Écouter</span>
+      <span id="playLabel" data-fr="Écouter" data-en="Listen">Écouter</span>
     </button>
 
     <!-- Now playing -->
     <div class="now-playing" id="nowPlaying">
       <span class="dot"></span>
-      <span>♪ Sortie Nocturne</span>
+      <span data-fr="♪ Sortie Nocturne" data-en="♪ Sortie Nocturne">♪ Sortie Nocturne</span>
     </div>
 
     <!-- Links -->
@@ -414,10 +447,35 @@
   <script>
     var playing = false;
     var widget = null;
+    var currentLang = 'fr';
 
     window.addEventListener('load', function() {
       widget = SC.Widget(document.getElementById('sc-player'));
     });
+
+    function setLang(lang) {
+      currentLang = lang;
+
+      // Update flag buttons
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+      // Update bio
+      var bio = document.getElementById('bio');
+      bio.innerHTML = bio.getAttribute('data-' + lang);
+
+      // Update all data-lang spans
+      document.querySelectorAll('[data-fr][data-en]').forEach(function(el) {
+        if (el.id !== 'bio') el.innerHTML = el.getAttribute('data-' + lang);
+      });
+
+      // Update play label if paused
+      if (!playing) {
+        document.getElementById('playLabel').textContent = lang === 'fr' ? 'Écouter' : 'Listen';
+      } else {
+        document.getElementById('playLabel').textContent = lang === 'fr' ? 'En cours...' : 'Playing...';
+      }
+    }
 
     function togglePlay() {
       if (!widget) return;
@@ -431,14 +489,14 @@
         playing = true;
         btn.classList.add('playing');
         icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-        label.textContent = 'En cours...';
+        label.textContent = currentLang === 'fr' ? 'En cours...' : 'Playing...';
         nowPlaying.classList.add('visible');
       } else {
         widget.pause();
         playing = false;
         btn.classList.remove('playing');
         icon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
-        label.textContent = 'Écouter';
+        label.textContent = currentLang === 'fr' ? 'Écouter' : 'Listen';
         nowPlaying.classList.remove('visible');
       }
     }
