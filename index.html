@@ -232,6 +232,42 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
+
+    /* ── Play button ── */
+    .play-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      padding: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-radius: 50px;
+      color: var(--text-secondary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+
+    .play-btn:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.25);
+      color: var(--text-primary);
+    }
+
+    .play-btn.playing {
+      color: #1DB954;
+      border-color: rgba(29,185,84,0.4);
+    }
+
+    .play-btn svg {
+      flex-shrink: 0;
+      transition: transform 0.18s;
+    }
   </style>
 </head>
 <body>
@@ -245,6 +281,14 @@
     <!-- Identity -->
     <h1 class="name">MorosiT</h1>
     <p class="bio">La suite arrive .... <strong style="color:#E63946;font-weight:700;">ACAB</strong></p>
+
+    <!-- Play button -->
+    <button class="play-btn" id="playBtn" onclick="togglePlay()">
+      <svg id="playIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="5,3 19,12 5,21"/>
+      </svg>
+      <span id="playLabel">Écouter</span>
+    </button>
 
     <!-- Links -->
     <div class="links-card">
@@ -323,7 +367,38 @@
     width="0" height="0"
     style="position:absolute;opacity:0;pointer-events:none;"
     scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https://on.soundcloud.com/S1uKDriAJpCHmWDQb0&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false">
+    src="https://w.soundcloud.com/player/?url=https://on.soundcloud.com/S1uKDriAJpCHmWDQb0&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false">
   </iframe>
+
+  <script>
+    var playing = false;
+    var widget = null;
+
+    window.addEventListener('load', function() {
+      widget = SC.Widget(document.getElementById('sc-player'));
+    });
+
+    function togglePlay() {
+      if (!widget) return;
+      var btn = document.getElementById('playBtn');
+      var icon = document.getElementById('playIcon');
+      var label = document.getElementById('playLabel');
+
+      if (!playing) {
+        widget.play();
+        playing = true;
+        btn.classList.add('playing');
+        icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        label.textContent = 'En cours...';
+      } else {
+        widget.pause();
+        playing = false;
+        btn.classList.remove('playing');
+        icon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+        label.textContent = 'Écouter';
+      }
+    }
+  </script>
+  <script src="https://w.soundcloud.com/player/api.js"></script>
 </body>
 </html>
