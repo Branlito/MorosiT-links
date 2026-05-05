@@ -311,16 +311,21 @@
       background: transparent;
       border: 1px solid transparent;
       border-radius: 8px;
-      font-size: 22px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
       cursor: pointer;
-      padding: 4px 6px;
+      padding: 5px 10px;
       line-height: 1;
       opacity: 0.35;
-      transition: opacity 0.18s, border-color 0.18s;
+      transition: opacity 0.18s, border-color 0.18s, color 0.18s;
     }
 
     .lang-btn.active {
       opacity: 1;
+      color: var(--text-primary);
       border-color: var(--border-hover);
     }
 
@@ -337,8 +342,8 @@
 
     <!-- Lang switcher -->
     <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">🇫🇷</button>
-      <button class="lang-btn" onclick="setLang('en')" id="btn-en">🇬🇧</button>
+      <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
     </div>
 
     <!-- Photo -->
