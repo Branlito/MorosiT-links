@@ -22,6 +22,7 @@
       --spotify: #1DB954;
       --soundcloud: #FF5500;
       --instagram: #E1306C;
+      --youtube: #FF0000;
       --red: #E63946;
     }
 
@@ -436,6 +437,14 @@
       border-color: rgba(255,85,0,0.2);
     }
 
+    .link-item.youtube .link-icon {
+      background: rgba(255,0,0,0.08);
+    }
+    .link-item.youtube:hover .link-icon {
+      border-color: rgba(255,0,0,0.2);
+    }
+    .link-item.youtube::before { background: var(--youtube); }
+
     .link-item.instagram .link-icon {
       background: rgba(225,48,108,0.08);
     }
@@ -564,6 +573,22 @@
         <div class="link-info">
           <div class="link-platform">Music</div>
           <div class="link-label">Spotify</div>
+        </div>
+        <svg class="link-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </a>
+
+      <a href="https://www.youtube.com/channel/UCnud34vFWBbM5yqF4ukPHsw" target="_blank" rel="noopener" class="link-item youtube">
+        <div class="link-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="5" width="20" height="14" rx="4" fill="#FF0000"/>
+            <polygon points="10,9 16,12 10,15" fill="white"/>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-platform">Video</div>
+          <div class="link-label">YouTube</div>
         </div>
         <svg class="link-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M7 17L17 7M17 7H7M17 7v10"/>
