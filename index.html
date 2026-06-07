@@ -68,7 +68,6 @@
       font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Grain overlay */
     body::after {
       content: '';
       position: fixed;
@@ -79,7 +78,6 @@
       mix-blend-mode: overlay;
     }
 
-    /* Ambient glow top */
     body::before {
       content: '';
       position: fixed;
@@ -93,7 +91,6 @@
       z-index: 0;
     }
 
-    /* Scanline sweep */
     .scanline {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -121,7 +118,6 @@
       align-items: center;
     }
 
-    /* ── Lang ── */
     .lang-switcher {
       display: flex;
       gap: 4px;
@@ -153,7 +149,6 @@
       color: var(--text);
     }
 
-    /* ── Photo ── */
     .photo-wrapper {
       width: 58%;
       border-radius: 14px;
@@ -178,7 +173,6 @@
       filter: contrast(1.05) saturate(0.9);
     }
 
-    /* ── Name ── */
     .name-block {
       text-align: center;
       margin-bottom: 12px;
@@ -196,7 +190,6 @@
       display: inline-block;
     }
 
-    /* Glitch effect on name */
     .name::before,
     .name::after {
       content: attr(data-text);
@@ -224,7 +217,6 @@
       animation-duration: 0.3s;
     }
 
-    /* ── Bio ── */
     .bio {
       font-size: 13px;
       font-weight: 400;
@@ -237,7 +229,6 @@
       animation: fadeUp 0.6s ease 0.3s both;
     }
 
-    /* ── Play ── */
     .player-zone {
       display: flex;
       flex-direction: column;
@@ -290,7 +281,6 @@
 
     .play-btn.playing::before { opacity: 1; }
 
-    /* Waveform bars */
     .waveform {
       display: flex;
       align-items: center;
@@ -345,7 +335,6 @@
       animation: pulse 1.4s ease-in-out infinite;
     }
 
-    /* ── Links ── */
     .links-wrap {
       width: 100%;
       display: flex;
@@ -369,7 +358,6 @@
       transition: border-color 0.2s, transform 0.15s;
     }
 
-    /* Shimmer on hover */
     .link-item::after {
       content: '';
       position: absolute;
@@ -392,7 +380,6 @@
       transform: scale(0.99) translateY(0);
     }
 
-    /* Left accent */
     .link-item::before {
       content: '';
       position: absolute;
@@ -423,34 +410,15 @@
       transition: border-color 0.2s;
     }
 
-    .link-item.spotify .link-icon {
-      background: rgba(29,185,84,0.08);
-    }
-    .link-item.spotify:hover .link-icon {
-      border-color: rgba(29,185,84,0.2);
-    }
-
-    .link-item.soundcloud .link-icon {
-      background: rgba(255,85,0,0.08);
-    }
-    .link-item.soundcloud:hover .link-icon {
-      border-color: rgba(255,85,0,0.2);
-    }
-
-    .link-item.youtube .link-icon {
-      background: rgba(255,0,0,0.08);
-    }
-    .link-item.youtube:hover .link-icon {
-      border-color: rgba(255,0,0,0.2);
-    }
-    .link-item.youtube::before { background: var(--youtube); }
-
-    .link-item.instagram .link-icon {
-      background: rgba(225,48,108,0.08);
-    }
-    .link-item.instagram:hover .link-icon {
-      border-color: rgba(225,48,108,0.2);
-    }
+    .link-item.spotify .link-icon    { background: rgba(29,185,84,0.08); }
+    .link-item.spotify:hover .link-icon { border-color: rgba(29,185,84,0.2); }
+    .link-item.soundcloud .link-icon { background: rgba(255,85,0,0.08); }
+    .link-item.soundcloud:hover .link-icon { border-color: rgba(255,85,0,0.2); }
+    .link-item.youtube .link-icon    { background: rgba(255,0,0,0.08); }
+    .link-item.youtube:hover .link-icon { border-color: rgba(255,0,0,0.2); }
+    .link-item.youtube::before       { background: var(--youtube); }
+    .link-item.instagram .link-icon  { background: rgba(225,48,108,0.08); }
+    .link-item.instagram:hover .link-icon { border-color: rgba(225,48,108,0.2); }
 
     .link-info { flex: 1; }
 
@@ -482,7 +450,6 @@
       transform: translate(3px, -3px);
     }
 
-    /* ── Footer ── */
     .footer {
       margin-top: 40px;
       font-size: 10px;
@@ -494,7 +461,6 @@
       animation: fadeUp 0.6s ease 0.7s both;
     }
 
-    /* ── Cursor glow follow ── */
     .cursor-glow {
       position: fixed;
       width: 300px;
@@ -514,29 +480,27 @@
 
   <div class="container">
 
-    <!-- Lang -->
     <div class="lang-switcher">
       <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
     </div>
 
-    <!-- Photo -->
     <div class="photo-wrapper">
       <img src="ACAB.jpg" alt="MorosiT" />
     </div>
 
-    <!-- Identity -->
     <div class="name-block">
       <h1 class="name" data-text="MorosiT">MorosiT</h1>
     </div>
 
     <p class="bio" id="bio"
-      data-fr="La suite arrive .... <strong style='color:var(--red);font-weight:700;'>ACAB</strong>"
-      data-en="More coming soon .... <strong style='color:var(--red);font-weight:700;'>ACAB</strong>">
-      La suite arrive .... <strong style="color:var(--red);font-weight:700;">ACAB</strong>
+      data-fr="<span style='color:var(--muted);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;'>Nouvel EP</span><br><strong style='color:var(--text);font-family:Bebas Neue,sans-serif;font-size:28px;letter-spacing:0.1em;'>Techno Morose</strong><br><span style='color:var(--red);font-weight:700;letter-spacing:0.06em;'>Dispo le 13 Juillet 🧠</span>"
+      data-en="<span style='color:var(--muted);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;'>New EP</span><br><strong style='color:var(--text);font-family:Bebas Neue,sans-serif;font-size:28px;letter-spacing:0.1em;'>Techno Morose</strong><br><span style='color:var(--red);font-weight:700;letter-spacing:0.06em;'>Available July 13th 🧠</span>">
+      <span style="color:var(--muted);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;">Nouvel EP</span><br>
+      <strong style="color:var(--text);font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.1em;">Techno Morose</strong><br>
+      <span style="color:var(--red);font-weight:700;letter-spacing:0.06em;">Dispo le 13 Juillet 🧠</span>
     </p>
 
-    <!-- Player -->
     <div class="player-zone">
       <button class="play-btn" id="playBtn" onclick="togglePlay()">
         <svg id="playIcon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -558,7 +522,6 @@
       </div>
     </div>
 
-    <!-- Links -->
     <div class="links-wrap">
 
       <a href="https://open.spotify.com/intl-fr/artist/0AIBAQGyTMDwqUKrR67oiA?si=bkneyYpORWmZ4WrBAnmjZA" target="_blank" rel="noopener" class="link-item spotify">
@@ -641,7 +604,6 @@
     <p class="footer">© 2026 MorosiT</p>
   </div>
 
-  <!-- SoundCloud player hidden -->
   <iframe
     id="sc-player"
     width="0" height="0"
@@ -651,14 +613,12 @@
   </iframe>
 
   <script>
-    /* ── Cursor glow ── */
     var glow = document.getElementById('cursorGlow');
     document.addEventListener('mousemove', function(e) {
       glow.style.left = e.clientX + 'px';
       glow.style.top  = e.clientY + 'px';
     });
 
-    /* ── SoundCloud ── */
     var playing = false;
     var widget = null;
     var currentLang = 'fr';
@@ -669,11 +629,11 @@
 
     function togglePlay() {
       if (!widget) return;
-      var btn       = document.getElementById('playBtn');
-      var icon      = document.getElementById('playIcon');
-      var label     = document.getElementById('playLabel');
+      var btn        = document.getElementById('playBtn');
+      var icon       = document.getElementById('playIcon');
+      var label      = document.getElementById('playLabel');
       var nowPlaying = document.getElementById('nowPlaying');
-      var wf        = document.getElementById('waveform');
+      var wf         = document.getElementById('waveform');
 
       if (!playing) {
         widget.play();
@@ -694,7 +654,6 @@
       }
     }
 
-    /* ── Lang ── */
     function setLang(lang) {
       currentLang = lang;
       document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
